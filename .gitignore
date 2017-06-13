@@ -5,9 +5,6 @@
 /tmp
 /out-tsc
 
-# uncompiled compiled output
-/src
-
 # dependencies
 /node_modules
 

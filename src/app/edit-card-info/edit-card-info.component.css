@@ -1,0 +1,49 @@
+.card-row.title:hover {
+  background-color: #f0ffff;
+}
+
+.card-row {
+  display: flex;
+  margin: 10px 0;
+  justify-content: flex-start;
+  flex-direction: row;
+}
+
+.card-edit {
+  align-self: center;
+}
+
+.card-title {
+  flex: 1;
+  padding: 0 10px;
+}
+
+.card-delete {
+  align-self: center;
+  margin-left: auto;
+}
+
+.set-pref {
+  padding: 0 10px;
+}
+
+md-input-container, select {
+  margin: 0 30px;
+}
+
+
+.preferred {
+  color: red;
+}
+
+.card-form {
+  display: flex;
+}
+
+.form-name {
+  width: 100%
+}
+
+.alert {
+  color: red;
+}

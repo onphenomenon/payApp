@@ -1,0 +1,8 @@
+<md-toolbar color="primary">
+  <img class="hello" src='./assets/cookiemonster.jpeg' alt="Smiley face">
+  <span>HELLO USER</span>
+</md-toolbar>
+<div class="main-container">
+  <edit-card-info [cards]="form.get('cards')" (add)="addCard($event)" (remove)="removeCard($event)" (set)="setPreferred($event)" (save)="saveCard($event)" [preferred]="form.get('preferred')">
+  </edit-card-info>
+</div>

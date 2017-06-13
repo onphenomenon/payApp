@@ -1,0 +1,18 @@
+.hello {
+  max-width:90%;
+  max-height:90%;
+  padding: 0 10px;
+}
+.main-container {
+  display: flex;
+  flex-flow: row wrap;
+  height: auto;
+  align-items: stretch;
+}
+edit-card-info {
+  margin: auto;
+  flex-grow: 1;
+  border: 3px solid rgba(0,0,0,.2);
+
+}
+

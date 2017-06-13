@@ -1,0 +1,100 @@
+<md-card>
+  <md-list>
+    <md-card-title class="md-no-sticky">Choose Credit Card</md-card-title>
+    <div *ngFor="let card of cards.controls; let i = index;">
+      <div class="card-row title">
+        <div class="card-edit" (click)="toggleCard(i)">
+          <span [hidden]="openCard !== i">
+              <i class="material-icons">lock_open</i>
+          </span>
+          <span [hidden]="openCard === i">
+            <i class="material-icons">lock</i>
+          </span>
+        </div>
+        <h3 class="card-title">
+          Card {{ i + 1 + " " }}{{ getType(card) }}
+        </h3>
+
+        <div class="card-delete" (click)="toggleCard(i)">
+
+          <span class="preferred" [hidden]="preferredCard !== i">
+
+            Preferred
+
+            <i class="material-icons">assignment_turned_in</i>
+          </span>
+          <span class="delete">
+            <i class="material-icons" (click)="removeCard(i)">delete</i>
+          </span>
+        </div>
+      </div>
+
+      <form [formGroup]="card" *ngIf="openCard === i" (ngSubmit)="onSubmit(i)">
+        <div class="card-row">
+          <md-input-container class="">
+            <input mdInput formControlName="firstName" placeholder="First name">
+          </md-input-container>
+          <md-input-container class="">
+            <input mdInput formControlName="lastName" placeholder="Last name">
+          </md-input-container>
+        </div>
+        <div *ngIf="formErrors.lastName || formErrors.firstName" class="alert">
+          {{ formErrors.firstName || formErrors.lastName }}
+        </div>
+
+        <div class="card-row">
+          <md-input-container class="">
+            <input type="number" mdInput formControlName="cardNumber" placeholder="Credit Card Number">
+          </md-input-container>
+        </div>
+        <div *ngIf="formErrors.cardNumber" class="alert">
+          {{ formErrors.cardNumber}}
+        </div>
+
+        <div class="card-row">
+          <select formControlName="cardType" [(ngModel)]="card.get('cardType').value">
+              <option value="default">--Select Card Type--</option>
+              <option *ngFor="let t of CardTypes" [ngValue]="t.value">{{t.viewValue}}</option>
+          </select>
+          <div class="set-pref" [class.preferred]="preferredCard === i" (click)="setPreferred(i)">
+            <i class="material-icons">assignment_turned_in</i>Preferred Card
+          </div>
+        </div>
+        <div *ngIf="formErrors.cardType" class="alert">
+          {{ formErrors.cardType}}
+        </div>
+
+
+        <div class="card-row">
+          <md-input-container class="">
+            <input mdInput formControlName="expiration" placeholder="Expires">
+          </md-input-container>
+
+          <md-input-container class="">
+            <input mdInput formControlName="csc" maxlength="3" placeholder="CSC">
+          </md-input-container>
+        </div>
+        <div *ngIf="formErrors.expiration || formErrors.csc" class="alert">
+          {{ formErrors.expiration || formErrors.csc }}
+        </div>
+
+        <div class="card-row">
+          <!--- button disabled unless form fields filled out correctly -->
+          <button type="submit" [disabled]="!card.valid" md-raised-button>
+            <i class="material-icons">done</i>SAVE
+          </button>
+        </div>
+      </form>
+
+
+    </div>
+
+    <md-divider></md-divider>
+  </md-list>
+  <md-card-actions>
+    <!--- cannot add credit card unless previous on has saved. and filled out correctly -->
+    <button [disabled]="!lastCardSaved()" (click)="addCard()" md-raised-button>
+      <i class="material-icons">add</i>Add Credit Card
+    </button>
+  </md-card-actions>
+</md-card>
